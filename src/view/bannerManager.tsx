@@ -95,15 +95,23 @@ class BannerManager extends React.Component<{}, {}> {
                 </div>
                 <div className="margin-bottom">
                     <span className="filter-title">生效日期</span>
-                    <RangePicker style={{ marginRight: 10 }} onChange={onChange} />
+                    <RangePicker style={{ marginRight: 10, marginBottom: 10 }} onChange={onChange} />
                     <span className="filter-title">发布状态</span>
-                    <Select defaultValue="" style={{ width: 120, marginRight: 10 }} onChange={handleChange}>
+                    <Select
+                        defaultValue=""
+                        style={{ width: 120, marginRight: 10, marginBottom: 10 }}
+                        onChange={handleChange}
+                    >
                         <Option value="">全部</Option>
                         <Option value="0">未发布</Option>
                         <Option value="1">已发布</Option>
                     </Select>
-                    <span className="filter-title">广告位</span>
-                    <Select defaultValue="" style={{ width: 120, marginRight: 10 }} onChange={handleChange}>
+                    <span className="filter-title margin-bottom">广告位</span>
+                    <Select
+                        defaultValue=""
+                        style={{ width: 120, marginRight: 10, marginBottom: 10 }}
+                        onChange={handleChange}
+                    >
                         <Option value="">全部</Option>
                         <Option value="0">顶部</Option>
                         <Option value="1">底部</Option>
