@@ -7,12 +7,12 @@ interface FristStepProps {
 }
 
 export default class FristStep extends React.Component<FristStepProps, {}> {
-    constructor(props: any) {
-        super(props);
-    }
     state = {
         value: 1,
     };
+    constructor(props: any) {
+        super(props);
+    }
     onChange = (e: any) => {
         this.setState({
             value: e.target.value,

@@ -18,9 +18,9 @@ const columns = [{
     title: '标题',
     dataIndex: 'title',
 }];
-const data: any = [];
+const tempData: any = [];
 for (let i = 0; i < 15; i++) {
-    data.push({
+    tempData.push({
         key: i,
         sort: `${i}`,
         state: i % 2 === 0 ? '未发布' : '已发布',
@@ -30,7 +30,7 @@ for (let i = 0; i < 15; i++) {
 
 class BannerManager extends React.Component<{}, {}> {
     state = {
-        data: data,
+        data: tempData,
         selectedRowKeys: [],  // Check here to configure the default column
         loading: false,
     };
@@ -42,29 +42,26 @@ class BannerManager extends React.Component<{}, {}> {
                 selectedRowKeys: [],
                 loading: false,
             });
+            message.success(`操作成功`);
         }, 1000);
     }
     onSelectChange = (selectedRowKeys: any) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
     }
     onPublish = (text: string) => {
         this.setState({ loading: true });
         let arr = this.state.selectedRowKeys;
         arr.forEach(item => {
-            data.forEach((i: any) => {
-                if (i.key == item) {
-                    i.state = text
+            tempData.forEach((i: any) => {
+                if (i.key === item) {
+                    i.state = text;
                 }
             });
         });
-        setTimeout(() => {
-            this.setState({ loading: false, data: data, selectedRowKeys: [] });
-            message.success(`操作成功`)
-        }, 1000);
+        this.start();
     }
     handleAdd = () => {
-        const { data } = this.state;
+        let { data } = this.state;
         let i = data.length + 1;
         const newData = {
             key: i,
@@ -75,7 +72,7 @@ class BannerManager extends React.Component<{}, {}> {
         this.setState({
             data: [...data, newData],
         });
-        message.success('新增成功')
+        message.success('新增成功');
     }
     render() {
         const { selectedRowKeys } = this.state;
@@ -84,10 +81,10 @@ class BannerManager extends React.Component<{}, {}> {
             onChange: this.onSelectChange,
         };
         const onChange = (date: any, dateString: any) => {
-            console.log(date, dateString);
+            // console.log(date, dateString);
         };
         function handleChange(value: any) {
-            console.log(`selected ${value}`);
+            // console.log(`selected ${value}`);
         }
         return (
             <div>
@@ -114,7 +111,12 @@ class BannerManager extends React.Component<{}, {}> {
                     <Button type="primary" icon="search">搜索</Button>
                 </div>
                 <div>
-                    <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} loading={this.state.loading} />
+                    <Table
+                        rowSelection={rowSelection}
+                        columns={columns}
+                        dataSource={this.state.data}
+                        loading={this.state.loading}
+                    />
                 </div>
             </div>
         );
