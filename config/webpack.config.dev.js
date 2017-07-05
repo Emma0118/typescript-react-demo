@@ -85,7 +85,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -141,6 +141,7 @@ module.exports = {
           /\.(js|jsx)(\?.*)?$/,
           /\.(ts|tsx)(\?.*)?$/,
           /\.css$/,
+          /\.less$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
@@ -168,6 +169,42 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
         loader: require.resolve('ts-loader'),
+        options: {
+          plugins: [
+            ['import', [{ libraryName: 'antd', style: true }]],  // import less
+          ],
+        }
+      },
+      {
+        test: /\.less$/,
+        use: [
+          require.resolve('style-loader'),
+          require.resolve('css-loader'),
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
+          {
+            loader: require.resolve('less-loader'),
+            options: {
+              modifyVars: { "@primary-color": "#000000" },
+            },
+          },
+        ],
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -179,7 +216,7 @@ module.exports = {
         use: [
           require.resolve('style-loader'),
           {
-            loader: require.resolve('css-loader'),
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
             },

@@ -2,12 +2,12 @@
 import * as React from 'react';
 import { Steps, Button, message } from 'antd';
 const Step = Steps.Step;
-import FristStep from './FristStep'
-import SecondStep from './SecondStep'
-import LastStep from './LastStep'
+import FristStep from './FristStep';
+import SecondStep from './SecondStep';
+import LastStep from './LastStep';
 
-//引入枚举
-import { stepsTitle } from '../enum/recommendEstateEnum'
+// 引入枚举
+import { stepsTitle } from '../enum/recommendEstateEnum';
 
 const steps = [{
     title: stepsTitle.one,
@@ -20,9 +20,9 @@ const steps = [{
     content: LastStep,
 }];
 
-const FristStepView = steps[0].content
-const SecondStepView = steps[1].content
-const LastStepView = steps[2].content
+const FristStepView = steps[0].content;
+const SecondStepView = steps[1].content;
+const LastStepView = steps[2].content;
 
 class Estate {
     id?: number;
@@ -40,7 +40,7 @@ export default class RecommendEstate extends React.Component<any, RecommendEstat
         this.state = {
             current: 0,
             estate: {
-                id:1
+                id: 1
             }
         };
     }
@@ -52,14 +52,14 @@ export default class RecommendEstate extends React.Component<any, RecommendEstat
         const current = this.state.current - 1;
         this.setState({ current });
     }
-    setValue (val:any) {
-        let obj = Object.assign(this.state.estate,{content:val.target.value})
+    setValue(val: object|any) {
+        let obj = Object.assign(this.state.estate, { content: val.target.value });
         this.setState({
             estate: obj
-        })
+        });
     }
-    changefunc = (val: any) => {
-        let obj = Object.assign(this.state.estate,{id:val})
+    changefunc = (val: number) => {
+        let obj = Object.assign(this.state.estate, { id: val });
         this.setState({
             estate: obj
         });
@@ -74,15 +74,15 @@ export default class RecommendEstate extends React.Component<any, RecommendEstat
                 </Steps>
                 <div className="steps-content">
                     {
-                        this.state.current == 0 &&
+                        this.state.current === 0 &&
                         <FristStepView changeFunc={this.changefunc} />
                     }
                     {
-                        this.state.current == 1 &&
+                        this.state.current === 1 &&
                         <SecondStepView estate={this.state.estate} setValue={this.setValue.bind(this)} />
                     }
                     {
-                        this.state.current == 2 &&
+                        this.state.current === 2 &&
                         <LastStepView estate={this.state.estate} />
                     }
                 </div>

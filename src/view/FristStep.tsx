@@ -3,21 +3,21 @@ import { Radio } from 'antd';
 const RadioGroup = Radio.Group;
 
 interface FristStepProps {
-    changeFunc:any;
+    changeFunc: any;
 }
 
-export default class FristStep extends React.Component<FristStepProps, any>{
+export default class FristStep extends React.Component<FristStepProps, {}> {
     constructor(props: any) {
         super(props);
     }
     state = {
         value: 1,
-    }
-    onChange = (e:any) => {
+    };
+    onChange = (e: any) => {
         this.setState({
             value: e.target.value,
         });
-        this.props.changeFunc(e.target.value)
+        this.props.changeFunc(e.target.value);
     }
     render() {
         return (
@@ -35,6 +35,6 @@ export default class FristStep extends React.Component<FristStepProps, any>{
                     <Radio value={4}>楼盘四</Radio>
                 </div>
             </RadioGroup>
-        )
+        );
     }
 }

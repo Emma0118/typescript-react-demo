@@ -6,7 +6,7 @@ import Home from '../view/home';
 
 export class About extends React.Component<{}, null> {
     render() {
-        return <div><div>评分</div><Rate allowHalf defaultValue={2.5} /></div>;
+        return <div><div>评分</div><Rate allowHalf={true} defaultValue={2.5} /></div>;
     }
 }
 

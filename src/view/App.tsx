@@ -15,7 +15,7 @@ import { Layout } from 'antd';
 const { Content, Sider } = Layout;
 
 interface Mode {
-  mode: any;
+  mode: string;
   collapsed: boolean;
 }
 class App extends React.Component<any, Mode> {
@@ -58,7 +58,7 @@ class App extends React.Component<any, Mode> {
           <MenuComponent mode={this.state.mode} />
         </Sider>
         <Layout className="bg-white">
-          <HeaderComponent toggle={this.toggle.bind(this)} collapsed={this.state.collapsed} />
+          <HeaderComponent toggle={this.toggle} collapsed={this.state.collapsed} />
           <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: '100%' }}>
             <BreadCrumbComponent />
             <Switch>

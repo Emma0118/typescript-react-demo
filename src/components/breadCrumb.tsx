@@ -30,9 +30,13 @@ function getList() {
             item.route.forEach((subitem: any, n: number) => {
                 if (window.location.pathname.indexOf(subitem.path) >= 0) {
                     arr.push(<Breadcrumb.Item key={i}>{item.name}</Breadcrumb.Item>);
-                    arr.push(<Breadcrumb.Item key={`${i}-${n}`}>
-                        <Link to={subitem.path} >{subitem.name}</Link>
-                    </Breadcrumb.Item>);
+                    arr.push(
+                        (
+                            <Breadcrumb.Item key={`${i}-${n}`}>
+                                <Link to={subitem.path} >{subitem.name}</Link>
+                            </Breadcrumb.Item>
+                        )
+                    );
                 }
             });
         }
